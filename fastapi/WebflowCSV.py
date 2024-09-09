@@ -10,7 +10,7 @@ import shutil
 router = APIRouter()
 
 PROCESSED_DIR = "processed"
-DOWNLOAD_URL = "http://localhost:8000/processed"  # Replace with your base URL
+DOWNLOAD_URL = "https://hbapi.leeseaver.com/processed"  # Replace with your base URL
 
 # Helper function to generate a slug from a filename
 def generate_slug(filename: str) -> str:

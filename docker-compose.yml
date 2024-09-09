@@ -5,9 +5,9 @@ services:
     build:
       context: ./fastapi
     container_name: hiddenblueprint-backend
-    command: uvicorn --reload main:app --host 0.0.0.0 --port 8000
+    command: uvicorn --reload main:app --host 0.0.0.0 --port 8010
     ports:
-      - "8000:8000"
+      - "8010:8010"
     volumes:
       - ./fastapi:/app
     networks:
@@ -19,11 +19,12 @@ services:
     container_name: hiddenblueprint-frontend
 
     ports:
-      - "3000:3000"
+      - "3010:3010"
     environment:
-      - REACT_APP_API_URL=http://backend:8000
+      - REACT_APP_USER_SERVICE_API_HOST=https://hbapi.leeseaver.com
       - NODE_ENV=development
       - HOST_OS=linux
+
     volumes:
       - ./frontend/src:/app/src    # Mount source code directory
       - ./frontend/public:/app/public  # Mount public directory
