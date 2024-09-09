@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  fastapi:
+    build:
+      context: ./fastapi
+    container_name: hiddenblueprint-backend
+    command: uvicorn --reload main:app --host 0.0.0.0 --port 8000
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./fastapi:/app
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: hiddenblueprint-frontend
+
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_URL=http://backend:8000
+      - NODE_ENV=development
+      - HOST_OS=linux
+    volumes:
+      - ./frontend/src:/app/src    # Mount source code directory
+      - ./frontend/public:/app/public  # Mount public directory
+      - /app/node_modules           # Make sure node_modules is excluded from being mounted
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

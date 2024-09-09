@@ -1,0 +1,6 @@
+# backend/requirements.txt
+fastapi
+uvicorn
+aiofiles
+pandas
+python-multipart
